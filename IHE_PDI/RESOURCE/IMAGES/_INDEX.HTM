@@ -1,0 +1,1822 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta name="vs_defaultClientScript" content="JavaScript">
+		<meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
+		<meta name="CODE_LANGUAGE" content="Visual Basic .NET 7.1">
+		<meta name="vs_defaultClientScript" content="JavaScript">
+		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>CD Direct</title>
+<style type="text/css">
+<!--
+BODY
+{
+	font-family: Arial, Helvetica,sans-serif;
+	font-size: 10pt;
+	color: #0B57A5;
+}
+
+.scan_name {
+	font-size: 8pt;
+	font-weight: bold;
+
+}
+.overall {
+	overflow: none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+.action {
+	color: #2E3192;
+}
+.L_image {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+}
+.L_image_bold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-weight: bold;
+}
+a:link {
+	color: #0B57A5;
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+	color: #0B57A5;
+}
+a:hover {
+	text-decoration: none;
+	color: #009FFF;
+}
+a:active {
+	text-decoration: none;
+	color: #0B57A5;
+}
+.style1 {color: #0B57A5}
+.imgShow
+{
+	display: block;
+	overflow: hidden;
+	position: static;
+}
+.reportShow
+{
+	display: block;
+	position: static;
+/*	width: 396px;*/
+	height: 100px;
+	overflow: hidden;
+	
+/*	display: inline;
+	clip: rect(400px auto auto 400px);
+	position: relative;	
+	
+/*	top: 20px;
+	left:20px;
+	width: 900px;
+	height: 600px;*/
+}
+.divMain
+{
+	overflow: auto;
+	display: block;
+	visibility: visible;
+	position: static;
+}
+.reportInnerHTML
+{
+	display: block;
+	/*overflow: auto;*/
+	position: static;
+	/*height: 300px;
+	width: 396px;
+	/*display: block;
+	overflow: auto;
+	position: static;*/
+}
+
+.reportBorder
+{
+	border-right: navy thin solid;
+	border-top: navy thin solid;
+	border-left: navy thin solid;
+	border-bottom: navy thin solid;
+}
+.reportNoBorder
+{
+	border-right:none;
+	border-top: none;
+	border-left: none;
+	border-bottom: none;
+}
+-->
+</style>
+
+<script language="JavaScript" type="text/JavaScript">
+	var image_width = new Array();//JPG_IMAGE_WIDTH = 600;
+	var image_height = new Array();//JPG_IMAGE_HEIGHT = 600;
+	var lastSer=0;
+	var lastImg=0;
+	var lastBkg=0;
+	var curStudy=0;
+	var curReport=0;
+	var i=0;
+	var j=0;
+	var z=0;
+	var iPatientIndex=0;
+	var isLoad=true;
+
+	var path = document.location.pathname;
+	var closeHelpMsgCounter = 0;
+//-----------Arrays------
+	var arrStdAccession = new Array();
+	var arrStudyInsUid =  new Array();
+	var arrStdMod = new Array();
+	var arrSeriesMod = new Array();
+	var arrSeriesPixelData = new Array();
+	var arrStdLinked = new Array();
+	var arrStdDate = new Array();
+	var intSeries = new Array();
+	var intReports = new Array();
+	var reportFileName = new Array();
+
+//----------parse-------
+
+	var _bpart="";
+	var _institution="DASA";
+	var intStudies = 0;	
+	var isSummary = false;	
+	var isMultiPatient = false;
+	var showMPT = true;
+	var showLTBX = false;
+	var ltbxCmdParams = "";
+
+//----------i18n------------
+	var	__Accession;
+	var __Study_List; 
+	var __Age;
+	var __Images;
+	var __Image;
+	var __Studies_Explorer;
+	var __Manipulate;
+	var __Done;
+	var __Loading;
+	var __Enlarge_Report;
+	var __View_All_Images;
+//----------------------
+	var nav = true;//(navigator.appName=="Microsoft Internet Explorer")?true :false;
+	var winNT = false;
+	var winOS = false;
+	if (navigator.appVersion.indexOf("Win")!=-1) winOS = true;
+	if (navigator.appVersion.indexOf("Windows NT")!=-1) winNT = true;
+	if (!winOS)
+	{
+	    showMPT = false;
+	    showLTBX = false;
+	} else if (!winNT)
+	{
+	    showMPT = false;
+	}
+	var m_canRunMP = false;
+	var m_pMP = null;
+	connectMP();
+//----------------------
+	var localHeight = screen.availHeight ;
+	var localWidth = screen.availWidth;
+	var shrinkReport = new Array();
+//----------------------	
+	var m_loadStudy;
+	var m_loadSeries;
+	var m_numOfSeriesSelected = 0;
+	var m_wholeStudySelected = false;
+	var externalReports = false;
+	var externalIcon = "";//"pdficon.gif" or "ext_rep.gif"
+
+//------------------------
+	var arrPicName = new Array();
+	var arrImgPerSeries = new Array();
+	var arrSeriesDesc = new Array();
+	var arrSeriesInsUid = new Array();
+	var arrPicLoad = new Array();
+	var _pname = new Array();
+	var _headerPName = new Array();
+	var _extReportName = new Array();
+	var _pid = new Array();
+	var _psex = new Array();
+	var _page = new Array();
+
+	
+//	_miniReportHeight=localHeight - 430;
+//	_miniReportWidth=396;	
+
+	
+
+		intStudies += 1;
+
+		
+
+			arrPicName[z] = new Array();
+			arrImgPerSeries[z] = new Array();
+			arrSeriesDesc[z] = new Array();
+			arrSeriesInsUid[z] = new Array();
+			arrPicLoad[z] = new Array();
+
+			_pname[z]  = "PEREIRA DE MELO RODRIGO ";
+			_headerPName[z] = "";
+			_extReportName[z] = "";
+			if (isMultiPatient)
+			{
+				_headerPName[z] = "PEREIRA DE MELO RODRIGO ";
+			}
+
+
+			_pid[z] = "10101464277";
+			_psex[z] = "M";
+			_page[z] = "31";
+
+			i=0;
+			arrStdAccession[z]="578604139341RMZP";
+			arrStudyInsUid[z]="1.2.840.55555.82006693.20171027072750225.3477";
+			arrStdMod[z]="MR,PR";
+			arrStdDate[z]="27/10/2017";	
+			arrSeriesMod[z] = new Array();
+			arrSeriesPixelData[z] = new Array();
+			arrStdLinked[z] = true;
+			intSeries[z]=7;
+			shrinkReport[z]=false;
+			image_width[z] = 600;
+			image_height[z] = 600;
+			
+			
+				j=0;
+				arrPicName[z][i] = new Array();
+				arrPicLoad[z][i] = new Array();
+
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13000995.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13000998.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001001.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001004.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001007.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001010.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001013.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001016.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001020.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001021.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001022.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001024.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001026.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001029.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001033.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001036.JPG";
+				
+
+				arrImgPerSeries[z][i] = j;
+				arrSeriesDesc[z][i] = "SAG T1 TSE";
+				arrSeriesInsUid[z][i] = "1.3.12.2.1107.5.2.33.137023.201710270810245799006279.0.0.0";
+				arrSeriesMod[z][i] = "MR";
+				arrSeriesPixelData[z][i] = true;
+				i++;
+			
+				j=0;
+				arrPicName[z][i] = new Array();
+				arrPicLoad[z][i] = new Array();
+
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001039.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001042.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001046.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001048.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001052.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001055.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001058.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001061.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001066.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001069.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001071.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001074.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001079.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001081.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001084.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001088.JPG";
+				
+
+				arrImgPerSeries[z][i] = j;
+				arrSeriesDesc[z][i] = "SAG T2 FAT SAT";
+				arrSeriesInsUid[z][i] = "1.3.12.2.1107.5.2.33.137023.2017102708132089618906378.0.0.0";
+				arrSeriesMod[z][i] = "MR";
+				arrSeriesPixelData[z][i] = true;
+				i++;
+			
+				j=0;
+				arrPicName[z][i] = new Array();
+				arrPicLoad[z][i] = new Array();
+
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001091.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001094.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001098.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001101.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001103.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001107.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001109.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001112.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001114.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001118.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001121.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001124.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001127.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001132.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001134.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001138.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001142.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001146.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001148.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001151.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001154.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001158.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001161.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001164.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001165.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001167.JPG";
+				
+
+				arrImgPerSeries[z][i] = j;
+				arrSeriesDesc[z][i] = "AXIAL T1 TSE";
+				arrSeriesInsUid[z][i] = "1.3.12.2.1107.5.2.33.137023.2017102708140862114806438.0.0.0";
+				arrSeriesMod[z][i] = "MR";
+				arrSeriesPixelData[z][i] = true;
+				i++;
+			
+				j=0;
+				arrPicName[z][i] = new Array();
+				arrPicLoad[z][i] = new Array();
+
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001170.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001174.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001177.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001181.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001185.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001188.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001192.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001196.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001198.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001200.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001203.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001207.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001208.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001213.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001217.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001219.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001223.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001228.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001231.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001236.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001239.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001243.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001247.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001250.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001253.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001258.JPG";
+				
+
+				arrImgPerSeries[z][i] = j;
+				arrSeriesDesc[z][i] = "AXIAL T2 FAT SAT";
+				arrSeriesInsUid[z][i] = "1.3.12.2.1107.5.2.33.137023.2017102708201569043106566.0.0.0";
+				arrSeriesMod[z][i] = "MR";
+				arrSeriesPixelData[z][i] = true;
+				i++;
+			
+				j=0;
+				arrPicName[z][i] = new Array();
+				arrPicLoad[z][i] = new Array();
+
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001262.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001266.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001274.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001279.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001285.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001288.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001292.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001295.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001298.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001300.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001305.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001308.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001312.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001317.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001320.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001323.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001328.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001331.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001337.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001339.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001343.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001345.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001347.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001352.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001355.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001358.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001361.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001366.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001370.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001374.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001382.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001385.JPG";
+				
+
+				arrImgPerSeries[z][i] = j;
+				arrSeriesDesc[z][i] = "COR T2 FAT SAT";
+				arrSeriesInsUid[z][i] = "1.3.12.2.1107.5.2.33.137023.2017102708243065102906770.0.0.0";
+				arrSeriesMod[z][i] = "MR";
+				arrSeriesPixelData[z][i] = true;
+				i++;
+			
+				j=0;
+				arrPicName[z][i] = new Array();
+				arrPicLoad[z][i] = new Array();
+
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001390.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001394.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001400.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001403.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001406.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001409.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001414.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001420.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001424.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001427.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001434.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001437.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001438.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001439.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001440.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001444.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001452.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001455.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001460.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001463.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001468.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001472.JPG";
+				
+
+				arrImgPerSeries[z][i] = j;
+				arrSeriesDesc[z][i] = "COR_DP_OBL";
+				arrSeriesInsUid[z][i] = "1.3.12.2.1107.5.2.33.137023.201710270827396206506880.0.0.0";
+				arrSeriesMod[z][i] = "MR";
+				arrSeriesPixelData[z][i] = true;
+				i++;
+			
+				j=0;
+				arrPicName[z][i] = new Array();
+				arrPicLoad[z][i] = new Array();
+
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224745/13001475.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224745/13001482.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224745/13001486.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224745/13001492.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224745/13001497.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224745/13001501.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224745/13001505.JPG";
+				
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224745/13001511.JPG";
+				
+
+				arrImgPerSeries[z][i] = j;
+				arrSeriesDesc[z][i] = "KEY_IMAGES PR";
+				arrSeriesInsUid[z][i] = "1.2.840.113704.7.1.0.1878139528187.1509355523.3";
+				arrSeriesMod[z][i] = "PR";
+				arrSeriesPixelData[z][i] = true;
+				i++;
+			
+			z++;
+		
+	
+
+
+	function PrevReport()
+	{
+		curReport--;
+		document.getElementById('ReportFrame_'+curStudy).src=reportFileName[curStudy][curReport];
+		if (curReport == 0)
+			document.getElementById('next_report_'+curStudy).style.visibility = 'hidden';
+		document.getElementById('prev_report_'+curStudy).style.visibility = 'visible';
+	}
+	function NextReport()
+	{
+		curReport++;
+		if (curReport+1 >= intReports[curStudy])
+			document.getElementById('prev_report_'+curStudy).style.visibility = 'hidden';
+		document.getElementById('ReportFrame_'+curStudy).src=reportFileName[curStudy][curReport];
+		document.getElementById('next_report_'+curStudy).style.visibility = 'visible';
+	}
+
+	function initHelpMsg()
+	{
+		document.getElementById('divHelpMsg').style.width=400 + 'px';
+		document.getElementById('divHelpMsg').style.height=150 + 'px';
+		document.getElementById('divHelpMsg').style.left=localWidth/2 - 200 + 'px';
+		document.getElementById('divHelpMsg').style.top=200 + 'px';
+	}
+
+	function displayHelpMsg()	
+	{
+		document.getElementById('divHelpMsg').style.display="Block";
+	}
+
+	function closeHelpMsg()	
+	{
+		document.getElementById('divHelpMsg').style.display="none";
+	}
+
+	function CloseAndExit()	{
+		window.close();
+	}
+		function loadStudies(){
+		if (intStudies > 0)
+				loadImages(0);	
+	}
+
+
+	// this function will load all the images
+	//var intCounter=0;
+	function loadImages(stdNum){
+		if (document.images){
+			if (intSeries[stdNum] > 0)
+			{
+				loadWhat(0,0,stdNum);
+			}
+		}
+	}
+	
+	function loadWhat(i,j,stdNum){
+		if (isLoad){
+			if (j<arrImgPerSeries[stdNum][i] && j<50){
+				var img00 = new Image();
+				img00.src = arrPicName[stdNum][i][j];
+				arrPicLoad[stdNum][i][j] = img00.src;
+				j++;
+				setTimeout("loadWhat("+i+","+j+","+stdNum+")", 0);
+			} 
+			else
+			{
+				i++;
+				if (i<intSeries[stdNum]) //move to the next series:
+				{
+						j=0;
+						setTimeout("loadWhat("+i+","+j+","+stdNum+")", 0);
+				} else {
+						stdNum++;
+						if (stdNum< intStudies)
+						{
+								i=0;
+								j=0;
+								setTimeout("loadWhat("+i+","+j+","+stdNum+")", 0);
+						}
+				}
+			}	
+		}
+	}
+	
+	
+	//scroll images
+	function mouseWheel()
+	{
+		if (cineState != 1 && arrImgPerSeries[curStudy][lastSer] > 0)
+		{
+			var dx = event.wheelDelta ;
+			var sign = dx > 0 ? 1 : -1;
+			var nextImg = lastImg + sign;
+			if (nextImg < 0) 
+				nextImg = 0;
+			else if (nextImg >= arrImgPerSeries[curStudy][lastSer])
+				nextImg--;
+			switchImage(lastSer, nextImg);
+		}
+	}
+	
+	
+	
+	function nextImage(sign)
+	{//new function
+		var nextImg = lastImg + sign;
+		if (nextImg < 0) 
+			nextImg = 0;
+		else if (nextImg >= arrImgPerSeries[curStudy][lastSer])
+			nextImg--;
+		switchImage(lastSer, nextImg);
+	}
+
+	
+	
+	
+	function keydown()
+	{
+		if (cineState != 1)
+		{
+			var dx = event.keyCode;
+			var n=1;
+			
+			if (dx==39)//right key
+				nextImage(1);
+			else if (dx==37) // left key
+					nextImage(-1);
+				 else if (dx==38)//up key
+					  {
+						if (lastSer>0)
+						{
+							while (arrImgPerSeries[curStudy][lastSer - n] <= 0 && lastSer - n > 0)
+								n++;
+							if (lastSer - n >= 0)
+								switchImage(lastSer-n,0);
+					    }
+					  }
+					  else if (dx==40)//down key 
+						   {
+							if (lastSer<(intSeries[curStudy]-1))
+							{
+									while (arrImgPerSeries[curStudy][lastSer + n] <= 0 &&(lastSer + n) < (intSeries[curStudy]-1))
+										n++;
+									if ( (lastSer+n) < intSeries[curStudy] )
+										switchImage(lastSer+n, 0);
+								}
+						   }
+		}
+	}
+
+	
+	
+	
+	
+	
+	function displayFirstImage()
+	{	
+		var found=false;
+		for (var i=0;i<intSeries[0] && !found;i++)
+		{
+			if (arrImgPerSeries[curStudy][i] > 0)
+			{
+				switchImage(i,0);
+				found=true;
+			}
+		}		
+		if(!found){
+			document['imgPrev'].src = "";
+			document['imgPrev'].style.visibility = "hidden";
+			document['imgPrev'].style.height = (image_height[curStudy] + 1) + 'px';
+			document['imgPrev'].style.width = (image_width[curStudy] + 1) + 'px';
+
+			document.getElementById('spnImageNum').innerHTML = "";
+		}
+	}	
+
+	function mouseOver(sNum,pNum) 
+	{
+		if (cineState != 1)
+		{
+			switchImage(sNum, pNum);
+		}
+	}
+
+
+		// Loads Images on the fly (if not loaded yet)
+	function switchImage(sNum,pNum) {
+		var screenWidth = localWidth - image_width[curStudy] - 30;
+		var screenRes=Math.floor((screenWidth-42)/4);
+		
+		var x1 = Math.floor(lastImg/screenRes);		
+		var x2 = Math.floor(pNum/screenRes);		
+		if (lastBkg != 0)
+			document.getElementById('tblRollOver' + curStudy + lastSer + x1).rows[0].cells[lastImg%screenRes].style.background = lastBkg;//border='0';
+		lastBkg = document.getElementById('tblRollOver' + curStudy + sNum + x2).rows[0].cells[pNum%screenRes].style.background;
+		document.getElementById('tblRollOver' + curStudy + sNum + x2).rows[0].cells[pNum%screenRes].style.background = 'steelblue';//border='thin solid dimgray';
+	
+		if(!arrPicLoad[curStudy][sNum][pNum]) {
+				var img00 = new Image();
+				img00.src = arrPicName[curStudy][sNum][pNum];
+				arrPicLoad[curStudy][sNum][pNum] = img00.src;
+		}
+		lastImg=pNum;
+		lastSer=sNum;
+	
+		document['imgPrev'].src = arrPicLoad[curStudy][sNum][pNum];
+		document['imgPrev'].style.height = (image_height[curStudy] + 1) + 'px';
+		document['imgPrev'].style.width = (image_width[curStudy] + 1) + 'px';
+		document['imgPrev'].style.visibility = "visible";
+
+		document.getElementById('spnImageNum').innerHTML = pNum+1;
+
+//		closeHelpMsgCounter++;
+//		if (closeHelpMsgCounter > 1)
+//			closeHelpMsg();
+	}
+	
+	var _enlargeReport=true;
+	function enlargeReport(){
+		if (_enlargeReport && intReports[curStudy]>0){
+		
+			document.getElementById('divBackground').style.display="block";
+			document.getElementById('divBackground').style.height=localHeight + 'px';
+			document.getElementById('divBackground').style.width=localWidth+ 'px';
+
+
+			document.getElementById('tableInnerReport'+curStudy).style.width=(localWidth-90) + 'px';			
+
+			if (shrinkReport[curStudy])
+			{
+				document.getElementById('tblReportHeadLine'+curStudy).style.width = "354" + 'px';
+				document.getElementById('tblReportHeadLine'+curStudy).style.height = "68" + 'px';
+				document.getElementById('tblReportHeadLine'+curStudy).style.backgroundImage =  "url(big_rprt.gif)";
+				document.getElementById('reportHeadLineFont'+curStudy).style.fontSize = "25" + 'px';
+				document.getElementById('tblReportPatientDetails'+curStudy).width="100%" + 'px';
+				
+				for (var i=0;i<3;i++){
+					document.getElementById('tblReportPatientDetails'+curStudy).rows[i].cells[0].style.fontSize="11";
+					document.getElementById('tblReportPatientDetails'+curStudy).rows[i].cells[1].style.fontSize="11";
+					document.getElementById('tblReportPatientDetails'+curStudy).rows[i].cells[3].style.fontSize="11";
+					document.getElementById('tblReportPatientDetails'+curStudy).rows[i].cells[4].style.fontSize="11";
+				}
+			}
+		
+			document.getElementById('spanStdAccessionReport').innerHTML="["+arrStdAccession[curStudy]+"]";
+			document.getElementById('spanModReport').innerHTML=arrStdMod[curStudy];
+			document.getElementById('spanDateReport').innerHTML=arrStdDate[curStudy];
+			
+			document.getElementById('spanDivReport').style.display="block";		
+			document.getElementById('tblDivReport').className="reportBorder";
+			document.getElementById('tblReport').className="reportNoBorder";
+			
+			document.getElementById('divReport').style.position="absolute";
+			document.getElementById('divReport').style.top="10" + 'px';
+			document.getElementById('divReport').style.left="10" + 'px';
+			document.getElementById('divReport').style.width=localWidth-20 + 'px';
+			document.getElementById('divReport').style.height=localHeight-20 + 'px';
+			
+			
+
+			document.getElementById('divInnerReport'+curStudy).style.width=localWidth-30 + 'px';
+			document.getElementById('divInnerReport'+curStudy).style.height=localHeight-110 + 'px';
+
+			document.getElementById('ReportFrame_'+curStudy).src = reportFileName[curStudy][curReport];
+			document.getElementById('ReportFrame_'+curStudy).style.width=localWidth-30 -4 + 'px';
+			document.getElementById('ReportFrame_'+curStudy).style.height=localHeight-110 -40 + 'px';
+			document.getElementById('ReportFrame_'+curStudy).style.overflow="visible";
+			
+			if (intReports[curStudy] > 1)
+			{
+				if (curReport == 0)
+					document.getElementById('next_report_'+curStudy).style.visibility = 'hidden';
+				else
+					document.getElementById('next_report_'+curStudy).style.visibility = 'visible';
+				
+				if (curReport+1 >= intReports[curStudy])
+					document.getElementById('prev_report_'+curStudy).style.visibility = 'hidden';
+				else
+					document.getElementById('prev_report_'+curStudy).style.visibility = 'visible';
+			}
+
+			document.getElementById('divReport').style.overflow="hidden";
+
+			document.getElementById('divInnerReport'+curStudy).style.display="block"
+			document.getElementById('ReportFrame_'+curStudy).style.display="block"
+
+		}else{
+			if (shrinkReport[curStudy]){
+				document.getElementById('tblReportHeadLine'+curStudy).style.backgroundImage =  "url(sml_rprt.gif)";
+				document.getElementById('tblReportHeadLine'+curStudy).style.width = "210" + 'px';
+				document.getElementById('tblReportHeadLine'+curStudy).style.height = "40" + 'px';
+				document.getElementById('reportHeadLineFont'+curStudy).style.fontSize = "14" + 'px';
+				
+				for (var i=0;i<3;i++){
+					document.getElementById('tblReportPatientDetails'+curStudy).rows[i].cells[0].style.fontSize="9";
+					document.getElementById('tblReportPatientDetails'+curStudy).rows[i].cells[1].style.fontSize="9";
+					document.getElementById('tblReportPatientDetails'+curStudy).rows[i].cells[3].style.fontSize="9";
+					document.getElementById('tblReportPatientDetails'+curStudy).rows[i].cells[4].style.fontSize="9";
+				}
+			}
+			
+			document.getElementById('spanStdAccession').innerHTML=arrStdAccession[curStudy];
+			document.getElementById('spanMod').innerHTML=arrStdMod[curStudy];
+			document.getElementById('spanDate').innerHTML=arrStdDate[curStudy];
+							
+			document.getElementById('tblDivReport').className="reportNoBorder";
+			document.getElementById('tblReport').className="reportBorder";
+			
+			
+			//document.getElementById('divReport').style.overflow="auto";
+			
+			document.getElementById('divReport').style.position="static";
+			document.getElementById('divReport').style.width= image_width[curStudy] - 4 + 'px';
+			document.getElementById('divReport').style.height = localHeight - image_height[curStudy] - 30 + 'px';
+
+
+			if (intReports[curStudy]>0){			
+				document.getElementById('tableInnerReport'+curStudy).style.width=(image_width[curStudy] - 4 -20) + 'px';
+				document.getElementById('divReport').style.overflow="hidden";
+				document.getElementById('divInnerReport'+curStudy).style.width=image_width[curStudy] - 4 + 'px';//-40;
+				document.getElementById('divInnerReport'+curStudy).style.height = localHeight - image_height[curStudy] - 30 + 'px';
+				document.getElementById('tableInnerReport'+curStudy).style.width=image_width[curStudy] - 4 -20 + 'px';//-80;
+
+				document.getElementById('ReportFrame_'+curStudy).src = reportFileName[curStudy][curReport];
+				document.getElementById('ReportFrame_'+curStudy).style.width=image_width[curStudy] - 4 - 4 + 'px';//-40;
+				document.getElementById('ReportFrame_'+curStudy).style.height = localHeight - 40 - image_height[curStudy] - 30 + 'px';
+
+			}
+
+
+			document.getElementById('mainDiv'+ curStudy).style.width=localWidth - image_width[curStudy] + 'px';			
+			document.getElementById('mainDiv'+ curStudy).style.height=localHeight-130 + 'px';			
+			document.getElementById('mainDiv'+ curStudy).style.display = "block";
+			
+			document.getElementById('spanDivReport').style.display="none";
+			document.getElementById('divBackground').style.display="none";
+			document.getElementById('innerImgTable').style.height = image_height[curStudy] + 'px';
+			document.getElementById('innerImgTable').style.width = image_width[curStudy] + 'px';
+
+			document.getElementById('enlarge_report_tab').style.width = image_width[curStudy] + 'px';
+			document.getElementById('enlarge_report_tab').style.backgroundPosition = "bottom right";
+			document.getElementById('enlarge_report_tab').style.backgroundRepeat = "no-repeat";
+			document.getElementById('L_image_tab').style.width = image_width[curStudy] + 'px';
+			document.getElementById('L_image_tab').style.backgroundPosition = "top left";
+			document.getElementById('L_image_tab').style.backgroundRepeat = "no-repeat";
+			
+		}
+		_enlargeReport=!_enlargeReport;
+	}
+	
+	
+	function load_link()
+	{
+
+			document.write("<td>");
+                        document.write("<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" ID=\"TableLaunchBottom\">");
+			document.write("<tr>");
+
+			document.write("<td width='10px' </td>");
+			document.write("<td width='60px' style=\"FONT-WEIGHT: bold; FONT-SIZE: x-large; BACKGROUND-POSITION: center left; BACKGROUND-REPEAT: no-repeat \" height='44px' align='left' valign='center' bgcolor=#FFFFFF>");
+			document.write("<a valign='absmiddle' style=\"FONT-WEIGHT: bold;FONT-SIZE: small;\" ><img src='Mglass.gif' width='12' height='12' border='0' valign='absmiddle'>&nbsp;Launch:</a>");
+			document.write("</td>");
+			if(showLTBX)
+			{
+				document.write("<td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>");
+				document.write("<td width='130px' style=\"FONT-WEIGHT: bold; FONT-SIZE: x-large; BACKGROUND-POSITION: center left; BACKGROUND-REPEAT: no-repeat \" height='44px' align='left' valign='center' bgcolor=#FFFFFF background='BTN_SM.GIF' nowrap>");
+				document.write("<a title='View DICOM Images of Selected Series' align='absmiddle' valign='absmiddle' style=\"FONT-WEIGHT: bold;FONT-SIZE: small;\" href=\"javascript:loadLTBX()\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Light Viewer</a>");
+				document.write("</td>");
+			}
+			if (showMPT)
+			{
+				document.write("<td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>");
+				document.write("<td width='130px' style=\"FONT-WEIGHT: bold; FONT-SIZE: x-large; BACKGROUND-POSITION: center left; BACKGROUND-REPEAT: no-repeat \" height='44px' align='left' valign='center' bgcolor=#FFFFFF background='BTN_SM.GIF' nowrap>");
+				document.write("<a title='View DICOM Images of Selected Series' align='absmiddle' valign='absmiddle' style=\"FONT-WEIGHT: bold;FONT-SIZE: 13px;\" href=\"javascript:loadMP()\">&nbsp;&nbsp;Advanced Viewer</a>");
+				document.write("</td>");
+			}			
+			document.write("</tr>");
+			document.write("</table>");
+			document.write("</td>");
+
+	}
+
+	function loadLTBX()
+	{
+
+		isLoad = false;								
+//		closeHelpMsg();
+
+		buildSeriesLst(false, 1);
+
+		if (m_numOfSeriesSelected > 0)
+			setTimeout("openLTBX()", 1);
+
+	}
+
+	function openLTBX()
+	{
+		// use CDStart to run MP:
+		try
+		{
+			m_pMP.OpenLtbx(m_loadStudy,m_loadSeries, ltbxCmdParams);		
+			splashScreen();
+		} catch(e)
+		{
+		}
+	}
+
+
+	function buildSeriesLst(include_non_pixel_data_series, max_serieses)
+	{
+		m_numOfSeriesSelected = 0;	
+		m_wholeStudySelected = (intSeries[curStudy] > 0);
+		var series = "";
+		for (var i=0;i<intSeries[curStudy];i++)
+		{  
+			if (document.getElementById('chk'+curStudy+'s'+i).checked == true)
+			{
+				if (include_non_pixel_data_series || arrSeriesPixelData[curStudy][i])
+				{
+					if (m_numOfSeriesSelected)
+						series += "\\";
+					m_numOfSeriesSelected++;
+					series += arrSeriesInsUid[curStudy][i];	
+					
+					//limit number of serieses
+					if(max_serieses >= 0 && m_numOfSeriesSelected == max_serieses){
+						break;
+					}
+				} 
+			} else
+				m_wholeStudySelected = false;
+		}
+		if (m_numOfSeriesSelected)
+		{
+			document.getElementById('divLoading').style.display="block";
+			stopCine();
+			m_loadStudy = arrStudyInsUid[curStudy];
+			m_loadSeries = series;
+		}
+		else
+		{
+			alert("Please Select Series.");
+		}
+
+	}
+
+
+	function loadMP()
+	{
+		isLoad = false;								
+//		closeHelpMsg();
+
+		buildSeriesLst(true, -1);
+		if (m_wholeStudySelected)
+			m_loadSeries = "";
+		if(m_numOfSeriesSelected){
+			setTimeout("loadDicom()", 1);
+		}
+	
+	}	
+
+	function loadDicom()
+	{
+		// use CDStart to run MP:
+		try
+		{
+			m_pMP.ShowStudy(m_loadStudy,m_loadSeries);		
+			splashScreen();
+		} catch(e)
+		{
+		}
+	}
+
+// unload CDStart ( will unload MP):
+	function onclose()
+	{
+		try
+		{
+			m_pMP.Unload();
+		} catch(e)
+		{
+		}
+	}
+
+// connect object to CDStart:
+	function connectMP()
+	{
+		if(m_pMP == null && winOS)
+		{
+			try{
+				m_pMP =  new ActiveXObject("CDStart.CDStart_CD");
+				m_canRunMP = m_pMP.CanRunMP();
+				if (!m_canRunMP)//not enough memory to run mp
+					showMPT = false;
+			} catch(e) {
+				showMPT = false;
+				showLTBX = false;
+			}
+		}
+			
+	}
+
+
+
+	var cineState=0;
+	var my_timer;
+	var cineSeries=0;
+
+	function stopCine()
+	{
+		cineState=0;
+		window.clearTimeout(my_timer);
+		document.getElementById('cineImage'+curStudy+'s'+cineSeries).src = "cineplay.jpg";
+		document.getElementById('cineImage'+curStudy+'s'+cineSeries).title = "Play Cine";
+	}
+	function startCine(seriesNum)
+	{
+		if (arrImgPerSeries[curStudy][seriesNum] > 0)
+		{
+	   	     cineState=1;
+	  	     cineSeries=seriesNum;
+		     document.getElementById('cineImage'+curStudy+'s'+cineSeries).src = "cinestop.jpg";
+		     document.getElementById('cineImage'+curStudy+'s'+cineSeries).title = "";
+		     switchImage(cineSeries, 0);
+		     my_timer=window.setTimeout("cineNext()",150);	
+		}
+	}
+	
+	function cineNext()
+	{
+		
+		if (lastImg>= arrImgPerSeries[curStudy][lastSer]-1)
+		{
+			stopCine();
+		} else {
+			switchImage(lastSer, lastImg+1);
+			my_timer=window.setTimeout("cineNext()",150);			
+		}
+	}
+	
+	function cine(seriesNum)
+	{
+		if (cineState==0)
+		{
+			startCine(seriesNum);
+
+		} else {
+			if (seriesNum != cineSeries)
+			{
+				stopCine();
+				startCine(seriesNum);
+			} else {			
+				stopCine();
+			}
+		}
+	}
+	
+	function CheckAll()
+	{
+			for (var i=0;i<intSeries[curStudy];i++)
+			{  
+				document.getElementById('chk'+curStudy+'s'+i).checked = true;
+			}
+	}
+
+	function UncheckAll()
+	{
+			for (var i=0;i<intSeries[curStudy];i++)
+			{  
+				document.getElementById('chk'+curStudy+'s'+i).checked = false;
+			}
+	}
+
+	function splashScreen()
+	{
+		var ret ;
+		try
+		{
+			ret = m_pMP.Active();
+			if (ret != "active") {
+				setTimeout("splashScreen()", 1000);
+			} else {
+				closeLoadingSplash();
+			}
+		} catch(e)
+		{
+			closeLoadingSplash();
+		}
+	}
+
+	
+	function closeLoadingSplash()
+	{
+		document.getElementById('divLoading').style.display="none";
+	}
+
+	function windowMax(){	
+		// move the lines from here to onLoad()
+		try {
+			window.moveTo(0,0);
+			window.resizeTo(screen.width,screen.height);		
+		} catch (e) {}
+	}
+	
+	//onLoad
+	function onLoad(){
+
+		document.getElementById('divLoading').style.width=400;
+		document.getElementById('divLoading').style.height=200;
+		document.getElementById('divLoading').style.left=localWidth/2 - 200;
+		document.getElementById('divLoading').style.top=150;
+		
+		initHelpMsg();
+		windowMax();
+
+		if (intStudies==1 && externalReports == false){// external reports links are in the studies list page (even if there is only one study)
+			document.getElementById('stdExplorer').style.display="none";
+			switchStudies(0);
+		} else
+			switchStudies(-1);
+
+		loadStudies();
+
+	}
+	
+	// this function will switch between studies
+	function switchStudies(stdNum){
+		var screenRes=Math.floor((localWidth - image_width[curStudy] - 30 - 42)/4);
+		if (lastBkg != 0)
+			document.getElementById('tblRollOver'+curStudy+lastSer+ Math.floor(lastImg/screenRes)).rows[0].cells[lastImg%screenRes].style.background = lastBkg ;//border='0';
+		lastBkg = lastImg = lastSer = 0;
+		curReport = 0;
+
+		if (stdNum==-1){
+		
+			document.getElementById('divBackground').style.display="block";
+			document.getElementById('divBackground').style.height=localHeight+'px';
+			document.getElementById('divBackground').style.width=localWidth+'px';		
+		
+			document.getElementById('tblStudiesList').style.width=localWidth-100 + 'px';	
+			document.getElementById('divOverFlow').style.width=localWidth-30 + 'px';
+			document.getElementById('divOverFlow').style.height = localHeight-130 + 'px';
+			document.getElementById('tblInnerStudy').style.height = localHeight-130 + 'px';
+			
+			document.getElementById('tblInnerStudy').style.width=localWidth-30 + 'px';
+
+			document.getElementById('allImages').style.display = "none";
+			
+			document.getElementById('divStudies').style.display="block";
+			
+			document.getElementById('spanStdAccessionReport').innerHTML="";
+			document.getElementById('spanModReport').innerHTML="";
+			document.getElementById('spanDateReport').innerHTML="";
+
+			if (isMultiPatient)
+			{
+				document.getElementById('spanHeaderPName').innerHTML= "Multi-Patients";
+				document.getElementById('spanHeaderPID').innerHTML= "";
+				document.getElementById('spanHeaderPSex').innerHTML="";									
+				document.getElementById('spanAgeTitle').innerHTML="";									
+				document.getElementById('spanHeaderPAge').innerHTML="";									
+			}
+			else
+			{
+				document.getElementById('spanHeaderPName').innerHTML= _pname[0];
+				document.getElementById('spanHeaderPID').innerHTML= _pid[0];
+				document.getElementById('spanHeaderPSex').innerHTML= _psex[0];							
+				document.getElementById('spanAgeTitle').innerHTML=  "Age:";									
+				document.getElementById('spanHeaderPAge').innerHTML= _page[0];									
+			}
+			
+			document.getElementById('spanDivReport').style.display="block";		
+			document.getElementById('tblDivReport').className="reportBorder";
+			document.getElementById('tblReport').className="reportNoBorder";
+			document.getElementById('divReport').style.position="absolute";
+			document.getElementById('divReport').style.top="10" + 'px';
+			document.getElementById('divReport').style.left="10" + 'px';
+			document.getElementById('divReport').style.width=localWidth-20 + 'px';
+			document.getElementById('divReport').style.height=localHeight-20 + 'px';
+
+			document.getElementById('divReport').style.overflow="hidden";
+			
+			for (var i=0;i<intStudies;i++)
+			{
+				if (intReports[i] > 0)
+					document.getElementById('divInnerReport'+i).style.display="none";
+			}
+			
+		}
+		else{		
+			// set vars according to modality image size:
+//			displayHelpMsg();
+			
+			document.getElementById('imgPrev').style.height = (image_height[stdNum] + 1) + 'px';
+			document.getElementById('imgPrev').style.width = (image_width[stdNum] + 1) + 'px';
+
+			document.getElementById('divImage').style.width = image_width[stdNum] + 'px';
+			document.getElementById('divImage').style.height = image_height[stdNum] + 'px';
+			document.getElementById('imgTable').style.width = image_width[stdNum] + 'px';
+			document.getElementById('innerImgTable').style.height = image_height[stdNum] + 'px';
+
+			document.getElementById('divStudies').style.display="none";	
+
+			document.getElementById('tblDivReport').className="reportNoBorder";
+			document.getElementById('tblReport').className="reportBorder";
+			document.getElementById('divReport').style.overflow="auto";
+			document.getElementById('divReport').style.position="static";
+			document.getElementById('divReport').style.width= image_width[stdNum] - 4 + 'px';
+			document.getElementById('divReport').style.height = localHeight - image_height[stdNum] - 30 + 'px';
+
+			document.getElementById('mainDiv'+ curStudy).style.width=localWidth - image_width[curStudy] + 'px';			
+			document.getElementById('mainDiv'+curStudy).style.height=localHeight-42 + 'px';
+			
+			document.getElementById('spanDivReport').style.display="none";
+			document.getElementById('divBackground').style.display="none";
+
+
+			curStudy=stdNum;
+			displayFirstImage();
+
+			
+			for (var i=0;i<intStudies;i++)
+				document.getElementById('mainDiv'+i).style.display="none";
+
+			if (isMultiPatient)
+			{
+				document.getElementById('spanHeaderPName').innerHTML= _pname[stdNum];
+				document.getElementById('spanHeaderPID').innerHTML= _pid[stdNum];
+				document.getElementById('spanHeaderPSex').innerHTML= _psex[stdNum];
+				document.getElementById('spanAgeTitle').innerHTML=  "Age:";									
+				document.getElementById('spanHeaderPAge').innerHTML= _page[stdNum];
+			}
+
+			document.getElementById('allImages').style.display = "block";
+			document.getElementById('mainDiv'+stdNum).style.display="block";
+			document.getElementById('spanStdAccession').innerHTML=arrStdAccession[curStudy];
+			document.getElementById('spanMod').innerHTML=arrStdMod[curStudy];
+			document.getElementById('spanDate').innerHTML=arrStdDate[curStudy];
+			document.getElementById('spanStdPName').innerHTML=_pname[stdNum];
+			document.getElementById('spanStdPID').innerHTML=_pid[stdNum];
+			document.getElementById('spanStdPAge').innerHTML=_page[stdNum];
+			document.getElementById('spanStdPSex').innerHTML=_psex[stdNum];
+
+			
+			// --------- reports handling --------------
+			//document.getElementById('divInnerReport'+curStudy).style.display="none";
+			
+			if (intReports[curStudy]>0){
+				document.getElementById('ReportFrame_'+curStudy).style.display="none";
+
+				document.getElementById('divInnerReport'+stdNum).style.display="block";
+				document.getElementById('divInnerReport'+curStudy).style.overflow="hidden";			
+				document.getElementById('divInnerReport'+curStudy).style.width=image_width[curStudy] - 4 -40 + 'px';
+				document.getElementById('divInnerReport'+curStudy).style.height= localHeight - image_height[curStudy] - 30 + 'px';
+
+				document.getElementById('ReportFrame_'+curStudy).style.display="block";
+				document.getElementById('ReportFrame_'+curStudy).style.overflow="hidden";			
+				document.getElementById('ReportFrame_'+curStudy).src = reportFileName[curStudy][curReport];
+				document.getElementById('ReportFrame_'+curStudy).style.width=image_width[curStudy] - 4 - 4 -40 + 'px';
+				document.getElementById('ReportFrame_'+curStudy).style.height= localHeight - 40 - image_height[curStudy] - 30 + 'px';
+				document.getElementById('enlarge_report_tab').style.display="block";
+			}
+			else
+			{
+				document.getElementById('enlarge_report_tab').style.display="none";
+			}
+			_enlargeReport=true;
+			enlargeReport();
+		}
+	}
+	
+	function setLang (){
+		//if (navigator.appName == 'Netscape')
+			//var language = navigator.language;
+		//else
+			//var language = navigator.browserLanguage;
+
+		language = document.defaultCharset;
+		alert(language);
+
+		if (language.indexOf("1255")>-1){ // hebrew
+		}
+		else if (language.indexOf("")>-1){
+		}
+		else {
+			__Accession="Accession";
+			__Study_List="Study List";
+			__Age="Age";
+			__Images="Images";
+			__Image="Image";
+			__Studies_Explorer="studies Explorer";
+			__Manipulate="Manfipulate";
+			__Done="Done";
+			__Loading="Loading";
+			__Enlarge_Report="Enlarge Report";
+			__View_All_Images="View All Images";
+		}
+	
+	}
+	
+</script>
+	</head>
+	<body onunload='onclose()' onkeydown='keydown()' class="overall" onload="onLoad()" scroll="no">
+		<!-- background div -->
+		<div id="divBackground" style="filter:Alpha(Opacity=80); overflow: none;position: absolute; display: none;background-color: #e9e9e7;"></div>
+		<!-- Help Msg splash div-->
+			<div class="reportBorder" id="divHelpMsg" style="DISPLAY: none;POSITION: absolute; BACKGROUND-COLOR: white">
+				<table width=100% cellpadding=0 cellspacing=0 border=0 ID="Table10">
+				<tr style="BACKGROUND-COLOR: #EA7125">
+					<td style="FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: red;  TEXT-ALIGN: center"><b>?</b></td>
+					<td align=left><img src="topback.gif"></td>
+					<td align=right>
+						<a href="javascript:closeHelpMsg()">&nbsp;&nbsp;<img src='close.gif' width='12' height='12' border='1' align='absmiddle'>&nbsp;&nbsp;</a>
+					</td>
+				</tr>
+				</table>
+				<table width=100% height="100%" cellpadding=0 cellspacing=0 border=0 ID="Table11" >
+				<tr><td style="FONT-SIZE: small; COLOR: navy; TEXT-ALIGN: center" align=center >
+							<b>Move the mouse over the Scan Representations bars. </b><br><b> Or use Arrow Keys for Navigation.</b>
+					</td></tr>
+				<tr><td align=center valign=top><img src="STRIPE_A.JPG"</td></tr>
+				</table>
+			</div>
+		<!-- loading splash div-->
+			<div class="reportBorder" id="divLoading" style="DISPLAY: none;FILTER: Alpha(Opacity=90);POSITION: absolute; BACKGROUND-COLOR: white">
+				<table width=100% cellpadding=0 cellspacing=0 border=0 ID="Table8">
+				<tr bgcolor="EA7125"><td align=left><img src="topback.gif"></td><td align=right>
+					<a href="javascript:closeLoadingSplash()">&nbsp;&nbsp;<img src='close.gif' width='12' height='12' border='1' align='absmiddle'>&nbsp;&nbsp;</a>
+				</td></tr>
+				</table>
+				<table width=100% height="100%" cellpadding=0 cellspacing=0 border=0 ID="Table9" 
+					style="BACKGROUND-POSITION: center 75%; BACKGROUND-ATTACHMENT: fixed; BACKGROUND-IMAGE: url(loading.gif); BACKGROUND-REPEAT: no-repeat">
+				<tr><td style="FONT-SIZE: xx-large; COLOR: red; TEXT-ALIGN: center" align=center >
+							<b> Loading</b>
+					</td></tr>
+				</table>
+			</div>
+			
+		<table cellpadding="0" cellspacing="0" width="100%" border="0" ID="Table3">
+			<tr>
+				<td ID="imgTable" valign="top">
+					<table height="100%" border="0" align="left" cellpadding="0" cellspacing="0" ID="Table4">
+						<!-- Start: Preview Image -->
+						<tr>
+							<!-- -->
+							<td ID="innerImgTable" onMouseWheel="javascript:mouseWheel()" colspan="2" align="left" valign="top" scope="col" bgcolor="black">
+								<div class="imgShow" id="divImage"><img name="imgPrev"
+										id="imgPrev"></div>
+							</td>
+						</tr>
+						<!-- FIX TAMIR -->
+						<tr>
+							<td height="24" id="L_image_tab" valign="top" background="LBg.gif" align="left"
+								scope="row"><span class="L_image">&nbsp;Lossy Image&nbsp;#&nbsp;</span><span class="L_image_bold" id="spnImageNum"></span>
+							</td>
+							<!-- End: Preview Image -->
+							<!-- Start: Reports -->
+							<td height="24" id="enlarge_report_tab" valign="bottom" background="RBg.gif" align="right">
+								<a href="JavaScript:enlargeReport()"><b><u>Enlarge Report</u></b><img src="er.gif" border=0></a>
+							</td>								
+						</tr>
+						<!-- FIX TAMIR -->
+						<tr>
+							<td colspan="2" scope="row">
+								<table class="reportBorder" bgcolor="white" cellpadding="0" cellspacing="0" ID="tblReport">
+									<tr>
+										<td>
+											<div class="reportShow" id="divReport">
+												<table bgcolor="white" height="110" border="0" cellpadding="0" cellspacing="0" ID="tblDivReport">
+													<tr>
+														<td>
+															<span id="spanDivReport" style="display: none;">
+																<table width="100%" border="0" cellpadding="0" cellspacing="0" ID="Table5">
+																	<tr bgcolor="#EA7125">
+																		<td nowrap>&nbsp;&nbsp;<script language="JavaScript" type="text/JavaScript">document.write("<a href=\"LinkPage.htm\" target=\"_blank\">"+_institution+"</a> - <span id =\"spanHeaderPName\"></span>&nbsp;&nbsp;<span id =\"spanHeaderPID\"></span>");</script></td>
+																		<td width="1"><img src="HeaderSp.gif" width="1" height="24"></td>
+																		<td nowrap>&nbsp;
+																			<span id ="spanHeaderPSex"></span>&nbsp;
+																			<span id ="spanAgeTitle"></span>
+																			<span id ="spanHeaderPAge"></span>
+																		<td nowrap>&nbsp;&nbsp;<script language="JavaScript" type="text/JavaScript">document.write(_bpart+" ");</script><span id="spanModReport"></span>&nbsp;<span id="spanStdAccessionReport"></span></td>
+																		<td width="1"><img src="HeaderSp.gif" width="1" height="24"></td>
+																		<td nowrap>&nbsp;&nbsp;<span id="spanDateReport"></span></td>
+																		<td width="1"><img src="HeaderSp.gif" width="1" height="24"></td>
+																		<td nowrap align="right">&nbsp;&nbsp;&nbsp;&nbsp;<img src="CARESTREAM_SMALL.GIF" width="73" height="18" align="absmiddle">
+																			<a href="javascript:CloseAndExit()">&nbsp;&nbsp;<img src='close.gif' width='12' height='12' border='1' align='absmiddle'>&nbsp;&nbsp;</a>
+																		</td>
+																		<td nowrap>&nbsp;</td>
+																	</tr>
+																</table>
+																<br>
+																<center id="allImages">
+																	<table cellpadding=0 width="300" height="26" cellspacing=0 border=0 background="all_imgs.gif" ID="Table6"><tr><td align="center"><a href="javascript:enlargeReport();"><b>View Study Images</b></a></td></tr></table>
+																</center>
+																<br>
+															</span>
+
+<div id="divStudies" style="display:none;">
+	<table border="0" cellpadding="0" cellspacing="0" ID="tblInnerStudy">
+	<tr><td  bordercolor="#FFFFFF" valign=top>
+		&nbsp;&nbsp;Studies List<p>
+		<hr color="#C5821E" size="1">
+		<div id="divOverFlow" style="overflow:auto">
+			<table border="0" cellpadding="0" bordercolor="#C5821E" bgcolor="#FFFFFF" ID="tblStudiesList">
+			<tr>
+				<td bordercolor="#FFFFFF" valign=top>
+					<script language="JavaScript" type="text/JavaScript">			
+						for (var i=0;i<intStudies;i++){
+						document.write("&nbsp;&nbsp;&nbsp;<img src='SL.gif' width='11' height='15' align='texttop'>&nbsp;&nbsp;");
+						if(arrStdLinked[i]){
+							document.write("<a href='javascript:switchStudies("+i+")'>");
+						}
+						document.write(_headerPName[i]+" "+arrStdMod[i]+" [Accession "+arrStdAccession[i]+"] &nbsp;"+arrStdDate[i]);
+						if(arrStdLinked[i]){
+							document.write("</a>");
+						}
+						document.write("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+						if (externalReports)
+								document.write("<img src='"+externalIcon +"' width='11' height='15' align='texttop'>&nbsp;&nbsp;<a href='"+_extReportName[i]+"' onclick=\"window.open(this.href); return false;\">"+ _extReportName[i]+"</a>");
+						document.write("<br><br>");
+						}
+					</script>
+				<br></td>
+			</tr>
+			</table>
+		</div>
+		</td>
+	</tr>
+	</table>
+</div>
+
+<script language="JavaScript" type="text/JavaScript">
+z=0;
+var r;
+
+
+	r=0;
+	reportFileName[z] = new Array();
+	
+	intReports[z]=r;
+	if (r > 0)
+	{
+		document.write("<div class='reportInnerHTML' style='display: none' id='divInnerReport"+z+"'>");
+		document.write("<table id='tableInnerReport"+z+"' align='center'>");
+		document.write("<tr><td>");
+		if (r > 1)
+		{
+			document.write("<table width=\"100%\"><tr><td align=left>");
+			document.write("<table id='prev_report_"+z+"'  cellpadding=0 width=\"126\" height=\"26\" cellspacing=0 border=0 background=\"BTN_SM.gif\" > ");
+			document.write("<tr><td align=\"center\" class=\"scan_name\"><a href=\"javascript:NextReport();\"><b><< PREV REPORT</b></a></td></tr></table></td>");
+			document.write("<td align=right><table id='next_report_"+z+"' style=\"VISIBILITY: hidden\" cellpadding=0 width=\"126\" height=\"26\" cellspacing=0 border=0 background=\"BTN_SM.gif\" > ");
+			document.write("<tr><td align=\"center\" class=\"scan_name\"><a href=\"javascript:PrevReport();\"><b>NEXT REPORT >></b></a></td></tr></table></td></tr></table>");
+			document.write("</td></tr>");
+			document.write("<tr><td>");
+		}
+		document.write("<iframe id='ReportFrame_"+z+"' name='ReportFrame_"+z+"' src='" + reportFileName[z][0] +"' frameborder=0 ></iframe>");
+		document.write("</td></tr></table></div>");
+	}
+	z++;
+
+
+</script>
+
+														</td>
+													</tr>
+												</table>
+											</div>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<!-- End: Reports -->
+					</table>
+				</td>
+				<td valign="top">
+					<!-- Header Start -->
+					<table width="100%" border="0" cellpadding="0" cellspacing="0" ID="Table1">
+						<tr height="18">
+							<td nowrap colspan="2" bgcolor="#EA7125" >&nbsp;&nbsp;<script language="JavaScript" type="text/JavaScript">document.write("<a href=\"LinkPage.htm\" target=\"_blank\">"+_institution+"</a>");</script></td>
+
+							<td bgcolor=#FFFFFF nowrap align="right" rowspan="2" width ='12'><img src="CARESTREAM_LOGO.GIF"  align="absmiddle"></td>
+							<td bgcolor="#EA7125" width ="20"><a href="javascript:CloseAndExit()"><img src='close.gif' width='12' height='12' border='1' align='absmiddle'></a></td>
+							
+						</tr>
+						<tr height="21">
+							<td bgcolor=#FFFFFF  >&nbsp;<span id="spanStdPName"></span>&nbsp;<span id="spanStdPID"></span></td>
+							<td  bgcolor=#FFFFFF align="right"><a id="stdExplorer" href="javascript:switchStudies(-1)">[<img src='Mglass.gif' width='12' height='10' border='0' align='absmiddle'>&nbsp;Studies Explorer]</a></td>
+							<td bgcolor="#EA7125"></td>
+						</tr>
+					</table>
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" ID="Table3">
+						<tr bgcolor="#F5F5F5">
+							<td nowrap height="22">&nbsp;
+								<span id="spanStdPSex"></span>&nbsp;
+								Age:
+								<span id="spanStdPAge"></span>
+							<td nowrap>&nbsp;&nbsp;<script language="JavaScript" type="text/JavaScript">document.write(_bpart+" ");</script><span id="spanMod"></span>&nbsp;[<span id="spanStdAccession"></span>]</td>
+							<td nowrap>&nbsp;&nbsp;<span id="spanDate"></span></td>
+
+						</tr>
+					</table>
+
+					<script language="JavaScript" type="text/JavaScript">
+					if (!isSummary && (showMPT || showLTBX))
+					{
+						document.write("<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" ID=\"Table12\">");
+						document.write("<tr>");
+						load_link();
+						document.write("</tr>");
+						document.write("<tr>");
+						document.write("<td height='16' nowrap style=\"FONT-WEIGHT: bold; FONT-SIZE: xsmall; \">&nbsp;&nbsp;&nbsp;Select:&nbsp;<a href=\"javascript:CheckAll()\">All</a>,&nbsp;<a href=\"javascript:UncheckAll()\">None</a>");
+						document.write("</td>");
+						document.write("<td width='500px'> </td>");
+						document.write("</tr>");
+						document.write("</table>");
+					}
+					</script>
+					
+					<!-- Header End -->
+					<!-- div instead of frames-->
+					
+							<script language="JavaScript" type="text/JavaScript">
+							// here you can change the rows colors
+							var bgColors = new Array("#F5F5F5","white");
+							
+							//here you can change the small column colors
+							var switchColors = new Array("#83A7DC","#E3EEFF");
+							var stdNum;
+
+							//flags
+							var color;
+							var tdcolor;
+							var imgShow;
+							var align;
+							var stdSeriesImgNum;
+
+							for (stdNum=0;stdNum<intStudies;stdNum++){
+								
+								color=1;
+								tdcolor=1;
+								align=true;
+
+								document.write("<div class='divMain' id='mainDiv"+stdNum+"' style='display: none'><form ID='Form"+stdNum+"'>");
+								var screenWidth = localWidth - image_width[stdNum] - 30;
+								var screenRes=Math.floor((screenWidth-42)/4);
+								document.write("<table align='center' border='0' cellpadding='0' cellspacing='0' ID='Table6' width='"+screenWidth+"'>");
+								
+								for (i=0;i<intSeries[stdNum];i++){
+									stdSeriesImgNum=arrImgPerSeries[stdNum][i];
+									document.write("<tr bgcolor='"+(bgColors[tdcolor])+"'>");
+
+									//create left arrow
+									if (stdSeriesImgNum>screenRes){
+										document.write("<td width='18' rowspan='"+(Math.ceil(stdSeriesImgNum / screenRes)+1)+"'  nowrap >");
+										document.write("<table width='18' border='0' cellspacing='0' cellpadding='0'>");
+										document.write("<tr><td height='16'></td></tr>");
+										document.write("<tr><td height='26' align='center'><a href=\"javascript:cine("+i+")\"><img title=\"Play Cine\" id='cineImage" + stdNum+"s"+i + "' border='0' src='cineplay.jpg'> </a></td></tr>");
+										imgShow=false;
+
+										for (z=0;z<Math.ceil(stdSeriesImgNum / screenRes)-1 ;z++){
+											if (imgShow)
+												document.write("<tr><td height='41' align='right' valign=top><img src='LArrow.gif' width='16' height='41'>&nbsp;</td></tr>");
+											else
+												document.write("<tr><td height='34'>&nbsp;</td></tr>");
+												
+											imgShow=!imgShow;
+										}
+										
+										document.write("</table>");
+										document.write("</td>");
+									}
+									else
+										document.write("<td width='18' rowspan='2' nowrap>&nbsp;<a href=\"javascript:cine("+i+")\"><img title=\"Play Cine\" id='cineImage" + stdNum+"s"+i + "' border='0' src=\"cineplay.jpg\"> </a></td>");
+									document.write("<td height='16' valign='middle' nowrap>");
+
+									if (!isSummary && (showMPT || showLTBX) && nav)
+									{
+										document.write("<input type='checkbox' ID='chk"+stdNum+"s"+i+"' NAME='chk"+stdNum+"s"+i+"' checked='true'>");
+									}
+									document.write("&nbsp;<b>"+arrSeriesDesc[stdNum][i]+"</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>");
+
+									document.write("<td height='16' valign='middle' nowrap>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;"+stdSeriesImgNum+" Images&gt;&nbsp;" + arrSeriesMod[stdNum][i] + "&nbsp;&nbsp;&nbsp;&nbsp;</td>");
+									
+									
+									// create right arrow
+									if (stdSeriesImgNum>screenRes){
+										document.write("<td width='19' rowspan='"+(Math.ceil(stdSeriesImgNum / screenRes)+1)+"' align='left' valign='top'><table width='19' border='0' cellspacing='0' cellpadding='0'>");
+										document.write("<tr><td height='16'>&nbsp;</td></tr>");
+										document.write("<tr><td height='19'>&nbsp;</td></tr>");
+
+										imgShow=true;
+
+										if (Math.ceil(stdSeriesImgNum / screenRes)%2==0){
+											//imgShow=false;
+											document.write("<tr><td height='7'></td></tr>");
+										}
+										for (z=0;z<Math.ceil(stdSeriesImgNum / screenRes)-1 ;z++){
+											if (imgShow)
+												document.write("<tr><td height='41' valign=top><img src='RArrow.gif' width='16' height='41'>&nbsp;</td></tr>");
+											else
+												document.write("<tr><td height='34'>&nbsp;</td></tr>");
+												
+											imgShow=!imgShow;
+										}
+											
+										document.write("</table></td>");
+									}
+									else
+										document.write("<td width='19' rowspan='2'>&nbsp;</td>");
+									
+									document.write("</tr>");
+
+									document.write("<tr bgcolor='"+(bgColors[tdcolor])+"'>");
+
+									document.write("<td height=39 colspan=2 valign=top align=left width="+(4*screenRes)+">");
+									document.write("<TABLE cellpadding=0 cellspacing=0 id='tblRollOver"+stdNum+i+"0'><TR>");
+									
+									
+									// creates the coloumns
+									align=true;
+									color=0;
+									for (j=0;j<stdSeriesImgNum;j++){
+										if (j%screenRes==0 && j>0){
+											//(color==1)?color=0:color=1;
+											document.write("</tr></table></td></tr><tr bgcolor='"+bgColors[tdcolor]+"'><td width="+(4*screenRes)+" height=39 colspan=2 valign=top ");
+											if (align){
+												document.write("align=right><TABLE cellpadding=0 cellspacing=0 dir=rtl id='tblRollOver"+stdNum+i+(j/screenRes)+"' ><TR>");
+												//(color==1)?color=0:color=1;
+											}
+											else
+												document.write("align=left><TABLE cellpadding=0 cellspacing=0  id='tblRollOver"+stdNum+i+(j/screenRes)+"'><TR>");
+
+											align=!align;
+											
+										}
+													
+										document.write("<TD height='32' width='4' style='background: "+(switchColors[color])+"' onMouseWheel='mouseWheel()' onMouseOver='mouseOver("+i+","+j+")'>");
+										(color==1)?color=0:color=1;
+										
+										document.write("&nbsp;</TD>");
+									}
+									document.write("</TR></TABLE></td>");
+									
+									document.write("</tr>");
+									(tdcolor==1)?tdcolor=0:tdcolor=1;
+								}
+								
+								document.write("</table>");
+								
+								if (!isSummary && (showMPT || showLTBX))
+								{
+									document.write("<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" ID=\"Table112\">");
+
+									document.write("<tr>");
+									document.write("<td height='16' nowrap style=\"FONT-WEIGHT: bold; FONT-SIZE: xsmall; \">&nbsp;&nbsp;&nbsp;Select:&nbsp;<a href=\"javascript:CheckAll()\">All</a>,&nbsp;<a href=\"javascript:UncheckAll()\">None</a>");
+									document.write("</td>");
+									document.write("<td width='500px'> </td>");
+									document.write("</tr>");
+
+										document.write("<tr>");
+										load_link();
+										document.write("</tr>");
+
+									document.write("</table>");
+								}
+								document.write("</form></div>");
+							}
+								</script>
+							
+				</td>
+			</tr>
+		</table>
+	</body>
+		
+</html>
