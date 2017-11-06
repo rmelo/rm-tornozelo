@@ -1,91 +1,81 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+	<head>
+		<meta name="vs_defaultClientScript" content="JavaScript">
+		<meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
+		<meta name="CODE_LANGUAGE" content="Visual Basic .NET 7.1">
+		<meta name="vs_defaultClientScript" content="JavaScript">
+		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>CD Direct</title>
+<style type="text/css">
+<!--
+BODY
+{
+	font-family: Arial, Helvetica,sans-serif;
+	font-size: 10pt;
+	color: #0B57A5;
+}
 
-<head>
-  <meta name="vs_defaultClientScript" content="JavaScript">
-  <meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
-  <meta name="CODE_LANGUAGE" content="Visual Basic .NET 7.1">
-  <meta name="vs_defaultClientScript" content="JavaScript">
-  <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>CD Direct</title>
-  <style type="text/css">
-    <!-- BODY {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 10pt;
-      color: #0B57A5;
-    }
+.scan_name {
+	font-size: 8pt;
+	font-weight: bold;
 
-    .scan_name {
-      font-size: 8pt;
-      font-weight: bold;
-
-    }
-
-    .overall {
-      overflow: none;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 8pt;
-      margin-bottom: 0px;
-      margin-top: 0px;
-      margin-left: 0px;
-      margin-right: 0px;
-    }
-
-    .action {
-      color: #2E3192;
-    }
-
-    .L_image {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 10pt;
-    }
-
-    .L_image_bold {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 10pt;
-      font-weight: bold;
-    }
-
-    a:link {
-      color: #0B57A5;
-      text-decoration: none;
-    }
-
-    a:visited {
-      text-decoration: none;
-      color: #0B57A5;
-    }
-
-    a:hover {
-      text-decoration: none;
-      color: #009FFF;
-    }
-
-    a:active {
-      text-decoration: none;
-      color: #0B57A5;
-    }
-
-    .style1 {
-      color: #0B57A5
-    }
-
-    .imgShow {
-      display: block;
-      overflow: hidden;
-      position: static;
-    }
-
-    .reportShow {
-      display: block;
-      position: static;
-      /*	width: 396px;*/
-      height: 100px;
-      overflow: hidden;
-
-      /*	display: inline;
+}
+.overall {
+	overflow: none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+.action {
+	color: #2E3192;
+}
+.L_image {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+}
+.L_image_bold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-weight: bold;
+}
+a:link {
+	color: #0B57A5;
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+	color: #0B57A5;
+}
+a:hover {
+	text-decoration: none;
+	color: #009FFF;
+}
+a:active {
+	text-decoration: none;
+	color: #0B57A5;
+}
+.style1 {color: #0B57A5}
+.imgShow
+{
+	display: block;
+	overflow: hidden;
+	position: static;
+}
+.reportShow
+{
+	display: block;
+	position: static;
+/*	width: 396px;*/
+	height: 100px;
+	overflow: hidden;
+	
+/*	display: inline;
 	clip: rect(400px auto auto 400px);
 	position: relative;	
 	
@@ -93,44 +83,44 @@
 	left:20px;
 	width: 900px;
 	height: 600px;*/
-    }
-
-    .divMain {
-      overflow: auto;
-      display: block;
-      visibility: visible;
-      position: static;
-    }
-
-    .reportInnerHTML {
-      display: block;
-      /*overflow: auto;*/
-      position: static;
-      /*height: 300px;
+}
+.divMain
+{
+	overflow: auto;
+	display: block;
+	visibility: visible;
+	position: static;
+}
+.reportInnerHTML
+{
+	display: block;
+	/*overflow: auto;*/
+	position: static;
+	/*height: 300px;
 	width: 396px;
 	/*display: block;
 	overflow: auto;
 	position: static;*/
-    }
+}
 
-    .reportBorder {
-      border-right: navy thin solid;
-      border-top: navy thin solid;
-      border-left: navy thin solid;
-      border-bottom: navy thin solid;
-    }
+.reportBorder
+{
+	border-right: navy thin solid;
+	border-top: navy thin solid;
+	border-left: navy thin solid;
+	border-bottom: navy thin solid;
+}
+.reportNoBorder
+{
+	border-right:none;
+	border-top: none;
+	border-left: none;
+	border-bottom: none;
+}
+-->
+</style>
 
-    .reportNoBorder {
-      border-right: none;
-      border-top: none;
-      border-left: none;
-      border-bottom: none;
-    }
-
-    -->
-  </style>
-
-  <script language="JavaScript" type="text/JavaScript">
+<script language="JavaScript" type="text/JavaScript">
 	var image_width = new Array();//JPG_IMAGE_WIDTH = 600;
 	var image_height = new Array();//JPG_IMAGE_HEIGHT = 600;
 	var lastSer=0;
@@ -271,37 +261,37 @@
 				arrPicLoad[z][i] = new Array();
 
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224732/13000995.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13000995.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224732/13000998.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13000998.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224732/13001001.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001001.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224732/13001004.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001004.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224732/13001007.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001007.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224732/13001010.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001010.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224732/13001013.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001013.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224732/13001016.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001016.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224732/13001020.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001020.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224732/13001021.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001021.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224732/13001022.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001022.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224732/13001024.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001024.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224732/13001026.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001026.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224732/13001029.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001029.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224732/13001033.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001033.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224732/13001036.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224732/13001036.JPG";
 				
 
 				arrImgPerSeries[z][i] = j;
@@ -316,37 +306,37 @@
 				arrPicLoad[z][i] = new Array();
 
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224733/13001039.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001039.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224733/13001042.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001042.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224733/13001046.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001046.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224733/13001048.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001048.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224733/13001052.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001052.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224733/13001055.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001055.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224733/13001058.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001058.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224733/13001061.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001061.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224733/13001066.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001066.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224733/13001069.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001069.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224733/13001071.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001071.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224733/13001074.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001074.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224733/13001079.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001079.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224733/13001081.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001081.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224733/13001084.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001084.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224733/13001088.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224733/13001088.JPG";
 				
 
 				arrImgPerSeries[z][i] = j;
@@ -361,57 +351,57 @@
 				arrPicLoad[z][i] = new Array();
 
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001091.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001091.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001094.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001094.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001098.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001098.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001101.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001101.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001103.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001103.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001107.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001107.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001109.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001109.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001112.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001112.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001114.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001114.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001118.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001118.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001121.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001121.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001124.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001124.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001127.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001127.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001132.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001132.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001134.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001134.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001138.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001138.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001142.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001142.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001146.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001146.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001148.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001148.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001151.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001151.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001154.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001154.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001158.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001158.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001161.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001161.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001164.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001164.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001165.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001165.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224734/13001167.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224734/13001167.JPG";
 				
 
 				arrImgPerSeries[z][i] = j;
@@ -426,57 +416,57 @@
 				arrPicLoad[z][i] = new Array();
 
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001170.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001170.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001174.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001174.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001177.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001177.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001181.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001181.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001185.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001185.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001188.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001188.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001192.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001192.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001196.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001196.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001198.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001198.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001200.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001200.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001203.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001203.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001207.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001207.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001208.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001208.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001213.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001213.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001217.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001217.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001219.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001219.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001223.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001223.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001228.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001228.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001231.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001231.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001236.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001236.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001239.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001239.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001243.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001243.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001247.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001247.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001250.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001250.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001253.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001253.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224736/13001258.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224736/13001258.JPG";
 				
 
 				arrImgPerSeries[z][i] = j;
@@ -491,69 +481,69 @@
 				arrPicLoad[z][i] = new Array();
 
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001262.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001262.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001266.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001266.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001274.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001274.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001279.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001279.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001285.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001285.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001288.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001288.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001292.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001292.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001295.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001295.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001298.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001298.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001300.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001300.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001305.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001305.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001308.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001308.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001312.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001312.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001317.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001317.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001320.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001320.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001323.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001323.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001328.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001328.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001331.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001331.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001337.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001337.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001339.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001339.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001343.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001343.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001345.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001345.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001347.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001347.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001352.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001352.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001355.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001355.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001358.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001358.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001361.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001361.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001366.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001366.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001370.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001370.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001374.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001374.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001382.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001382.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224738/13001385.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224738/13001385.JPG";
 				
 
 				arrImgPerSeries[z][i] = j;
@@ -568,49 +558,49 @@
 				arrPicLoad[z][i] = new Array();
 
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224741/13001390.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001390.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224741/13001394.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001394.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224741/13001400.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001400.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224741/13001403.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001403.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224741/13001406.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001406.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224741/13001409.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001409.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224741/13001414.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001414.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224741/13001420.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001420.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224741/13001424.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001424.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224741/13001427.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001427.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224741/13001434.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001434.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224741/13001437.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001437.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224741/13001438.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001438.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224741/13001439.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001439.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224741/13001440.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001440.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224741/13001444.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001444.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224741/13001452.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001452.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224741/13001455.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001455.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224741/13001460.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001460.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224741/13001463.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001463.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224741/13001468.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001468.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224741/13001472.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224741/13001472.JPG";
 				
 
 				arrImgPerSeries[z][i] = j;
@@ -625,21 +615,21 @@
 				arrPicLoad[z][i] = new Array();
 
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224745/13001475.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224745/13001475.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224745/13001482.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224745/13001482.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224745/13001486.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224745/13001486.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224745/13001492.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224745/13001492.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224745/13001497.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224745/13001497.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224745/13001501.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224745/13001501.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224745/13001505.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224745/13001505.JPG";
 				
-					arrPicName[z][i][j++]= "IHE_PDI/000/000/022/569/27047/224745/13001511.JPG";
+					arrPicName[z][i][j++]= "../../../IHE_PDI/000/000/022/569/27047/224745/13001511.JPG";
 				
 
 				arrImgPerSeries[z][i] = j;
@@ -1455,165 +1445,112 @@
 	}
 	
 </script>
-</head>
+	</head>
+	<body onunload='onclose()' onkeydown='keydown()' class="overall" onload="onLoad()" scroll="no">
+		<!-- background div -->
+		<div id="divBackground" style="filter:Alpha(Opacity=80); overflow: none;position: absolute; display: none;background-color: #e9e9e7;"></div>
+		<!-- Help Msg splash div-->
+			<div class="reportBorder" id="divHelpMsg" style="DISPLAY: none;POSITION: absolute; BACKGROUND-COLOR: white">
+				<table width=100% cellpadding=0 cellspacing=0 border=0 ID="Table10">
+				<tr style="BACKGROUND-COLOR: #EA7125">
+					<td style="FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: red;  TEXT-ALIGN: center"><b>?</b></td>
+					<td align=left><img src="topback.gif"></td>
+					<td align=right>
+						<a href="javascript:closeHelpMsg()">&nbsp;&nbsp;<img src='close.gif' width='12' height='12' border='1' align='absmiddle'>&nbsp;&nbsp;</a>
+					</td>
+				</tr>
+				</table>
+				<table width=100% height="100%" cellpadding=0 cellspacing=0 border=0 ID="Table11" >
+				<tr><td style="FONT-SIZE: small; COLOR: navy; TEXT-ALIGN: center" align=center >
+							<b>Move the mouse over the Scan Representations bars. </b><br><b> Or use Arrow Keys for Navigation.</b>
+					</td></tr>
+				<tr><td align=center valign=top><img src="STRIPE_A.JPG"</td></tr>
+				</table>
+			</div>
+		<!-- loading splash div-->
+			<div class="reportBorder" id="divLoading" style="DISPLAY: none;FILTER: Alpha(Opacity=90);POSITION: absolute; BACKGROUND-COLOR: white">
+				<table width=100% cellpadding=0 cellspacing=0 border=0 ID="Table8">
+				<tr bgcolor="EA7125"><td align=left><img src="topback.gif"></td><td align=right>
+					<a href="javascript:closeLoadingSplash()">&nbsp;&nbsp;<img src='close.gif' width='12' height='12' border='1' align='absmiddle'>&nbsp;&nbsp;</a>
+				</td></tr>
+				</table>
+				<table width=100% height="100%" cellpadding=0 cellspacing=0 border=0 ID="Table9" 
+					style="BACKGROUND-POSITION: center 75%; BACKGROUND-ATTACHMENT: fixed; BACKGROUND-IMAGE: url(loading.gif); BACKGROUND-REPEAT: no-repeat">
+				<tr><td style="FONT-SIZE: xx-large; COLOR: red; TEXT-ALIGN: center" align=center >
+							<b> Loading</b>
+					</td></tr>
+				</table>
+			</div>
+			
+		<table cellpadding="0" cellspacing="0" width="100%" border="0" ID="Table3">
+			<tr>
+				<td ID="imgTable" valign="top">
+					<table height="100%" border="0" align="left" cellpadding="0" cellspacing="0" ID="Table4">
+						<!-- Start: Preview Image -->
+						<tr>
+							<!-- -->
+							<td ID="innerImgTable" onMouseWheel="javascript:mouseWheel()" colspan="2" align="left" valign="top" scope="col" bgcolor="black">
+								<div class="imgShow" id="divImage"><img name="imgPrev"
+										id="imgPrev"></div>
+							</td>
+						</tr>
+						<!-- FIX TAMIR -->
+						<tr>
+							<td height="24" id="L_image_tab" valign="top" background="LBg.gif" align="left"
+								scope="row"><span class="L_image">&nbsp;Lossy Image&nbsp;#&nbsp;</span><span class="L_image_bold" id="spnImageNum"></span>
+							</td>
+							<!-- End: Preview Image -->
+							<!-- Start: Reports -->
+							<td height="24" id="enlarge_report_tab" valign="bottom" background="RBg.gif" align="right">
+								<a href="JavaScript:enlargeReport()"><b><u>Enlarge Report</u></b><img src="er.gif" border=0></a>
+							</td>								
+						</tr>
+						<!-- FIX TAMIR -->
+						<tr>
+							<td colspan="2" scope="row">
+								<table class="reportBorder" bgcolor="white" cellpadding="0" cellspacing="0" ID="tblReport">
+									<tr>
+										<td>
+											<div class="reportShow" id="divReport">
+												<table bgcolor="white" height="110" border="0" cellpadding="0" cellspacing="0" ID="tblDivReport">
+													<tr>
+														<td>
+															<span id="spanDivReport" style="display: none;">
+																<table width="100%" border="0" cellpadding="0" cellspacing="0" ID="Table5">
+																	<tr bgcolor="#EA7125">
+																		<td nowrap>&nbsp;&nbsp;<script language="JavaScript" type="text/JavaScript">document.write("<a href=\"LinkPage.htm\" target=\"_blank\">"+_institution+"</a> - <span id =\"spanHeaderPName\"></span>&nbsp;&nbsp;<span id =\"spanHeaderPID\"></span>");</script></td>
+																		<td width="1"><img src="HeaderSp.gif" width="1" height="24"></td>
+																		<td nowrap>&nbsp;
+																			<span id ="spanHeaderPSex"></span>&nbsp;
+																			<span id ="spanAgeTitle"></span>
+																			<span id ="spanHeaderPAge"></span>
+																		<td nowrap>&nbsp;&nbsp;<script language="JavaScript" type="text/JavaScript">document.write(_bpart+" ");</script><span id="spanModReport"></span>&nbsp;<span id="spanStdAccessionReport"></span></td>
+																		<td width="1"><img src="HeaderSp.gif" width="1" height="24"></td>
+																		<td nowrap>&nbsp;&nbsp;<span id="spanDateReport"></span></td>
+																		<td width="1"><img src="HeaderSp.gif" width="1" height="24"></td>
+																		<td nowrap align="right">&nbsp;&nbsp;&nbsp;&nbsp;<img src="CARESTREAM_SMALL.GIF" width="73" height="18" align="absmiddle">
+																			<a href="javascript:CloseAndExit()">&nbsp;&nbsp;<img src='close.gif' width='12' height='12' border='1' align='absmiddle'>&nbsp;&nbsp;</a>
+																		</td>
+																		<td nowrap>&nbsp;</td>
+																	</tr>
+																</table>
+																<br>
+																<center id="allImages">
+																	<table cellpadding=0 width="300" height="26" cellspacing=0 border=0 background="all_imgs.gif" ID="Table6"><tr><td align="center"><a href="javascript:enlargeReport();"><b>View Study Images</b></a></td></tr></table>
+																</center>
+																<br>
+															</span>
 
-<body onunload='onclose()' onkeydown='keydown()' class="overall" onload="onLoad()" scroll="no">
-  <!-- background div -->
-  <div id="divBackground" style="filter:Alpha(Opacity=80); overflow: none;position: absolute; display: none;background-color: #e9e9e7;"></div>
-  <!-- Help Msg splash div-->
-  <div class="reportBorder" id="divHelpMsg" style="DISPLAY: none;POSITION: absolute; BACKGROUND-COLOR: white">
-    <table width=100% cellpadding=0 cellspacing=0 border=0 ID="Table10">
-      <tr style="BACKGROUND-COLOR: #EA7125">
-        <td style="FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: red;  TEXT-ALIGN: center">
-          <b>?</b>
-        </td>
-        <td align=left>
-          <img src="topback.gif">
-        </td>
-        <td align=right>
-          <a href="javascript:closeHelpMsg()">&nbsp;&nbsp;
-            <img src='close.gif' width='12' height='12' border='1' align='absmiddle'>&nbsp;&nbsp;</a>
-        </td>
-      </tr>
-    </table>
-    <table width=100% height="100%" cellpadding=0 cellspacing=0 border=0 ID="Table11">
-      <tr>
-        <td style="FONT-SIZE: small; COLOR: navy; TEXT-ALIGN: center" align=center>
-          <b>Move the mouse over the Scan Representations bars. </b>
-          <br>
-          <b> Or use Arrow Keys for Navigation.</b>
-        </td>
-      </tr>
-      <tr>
-        <td align=center valign=top>
-          <img src="STRIPE_A.JPG" </td>
-      </tr>
-    </table>
-  </div>
-  <!-- loading splash div-->
-  <div class="reportBorder" id="divLoading" style="DISPLAY: none;FILTER: Alpha(Opacity=90);POSITION: absolute; BACKGROUND-COLOR: white">
-    <table width=100% cellpadding=0 cellspacing=0 border=0 ID="Table8">
-      <tr bgcolor="EA7125">
-        <td align=left>
-          <img src="topback.gif">
-        </td>
-        <td align=right>
-          <a href="javascript:closeLoadingSplash()">&nbsp;&nbsp;
-            <img src='close.gif' width='12' height='12' border='1' align='absmiddle'>&nbsp;&nbsp;</a>
-        </td>
-      </tr>
-    </table>
-    <table width=100% height="100%" cellpadding=0 cellspacing=0 border=0 ID="Table9" style="BACKGROUND-POSITION: center 75%; BACKGROUND-ATTACHMENT: fixed; BACKGROUND-IMAGE: url(loading.gif); BACKGROUND-REPEAT: no-repeat">
-      <tr>
-        <td style="FONT-SIZE: xx-large; COLOR: red; TEXT-ALIGN: center" align=center>
-          <b> Loading</b>
-        </td>
-      </tr>
-    </table>
-  </div>
-
-  <table cellpadding="0" cellspacing="0" width="100%" border="0" ID="Table3">
-    <tr>
-      <td ID="imgTable" valign="top">
-        <table height="100%" border="0" align="left" cellpadding="0" cellspacing="0" ID="Table4">
-          <!-- Start: Preview Image -->
-          <tr>
-            <!-- -->
-            <td ID="innerImgTable" onMouseWheel="javascript:mouseWheel()" colspan="2" align="left" valign="top" scope="col" bgcolor="black">
-              <div class="imgShow" id="divImage">
-                <img name="imgPrev" id="imgPrev">
-              </div>
-            </td>
-          </tr>
-          <!-- FIX TAMIR -->
-          <tr>
-            <td height="24" id="L_image_tab" valign="top" background="LBg.gif" align="left" scope="row">
-              <span class="L_image">&nbsp;Lossy Image&nbsp;#&nbsp;</span>
-              <span class="L_image_bold" id="spnImageNum"></span>
-            </td>
-            <!-- End: Preview Image -->
-            <!-- Start: Reports -->
-            <td height="24" id="enlarge_report_tab" valign="bottom" background="RBg.gif" align="right">
-              <a href="JavaScript:enlargeReport()">
-                <b>
-                  <u>Enlarge Report</u>
-                </b>
-                <img src="er.gif" border=0>
-              </a>
-            </td>
-          </tr>
-          <!-- FIX TAMIR -->
-          <tr>
-            <td colspan="2" scope="row">
-              <table class="reportBorder" bgcolor="white" cellpadding="0" cellspacing="0" ID="tblReport">
-                <tr>
-                  <td>
-                    <div class="reportShow" id="divReport">
-                      <table bgcolor="white" height="110" border="0" cellpadding="0" cellspacing="0" ID="tblDivReport">
-                        <tr>
-                          <td>
-                            <span id="spanDivReport" style="display: none;">
-                              <table width="100%" border="0" cellpadding="0" cellspacing="0" ID="Table5">
-                                <tr bgcolor="#EA7125">
-                                  <td nowrap>&nbsp;&nbsp;
-                                    <script language="JavaScript" type="text/JavaScript">document.write("<a href=\"LinkPage.htm\" target=\"_blank\">"+_institution+"</a> - <span id =\"spanHeaderPName\"></span>&nbsp;&nbsp;<span id =\"spanHeaderPID\"></span>");</script>
-                                  </td>
-                                  <td width="1">
-                                    <img src="HeaderSp.gif" width="1" height="24">
-                                  </td>
-                                  <td nowrap>&nbsp;
-                                    <span id="spanHeaderPSex"></span>&nbsp;
-                                    <span id="spanAgeTitle"></span>
-                                    <span id="spanHeaderPAge"></span>
-                                    <td nowrap>&nbsp;&nbsp;
-                                      <script language="JavaScript" type="text/JavaScript">document.write(_bpart+" ");</script>
-                                      <span id="spanModReport"></span>&nbsp;
-                                      <span id="spanStdAccessionReport"></span>
-                                    </td>
-                                    <td width="1">
-                                      <img src="HeaderSp.gif" width="1" height="24">
-                                    </td>
-                                    <td nowrap>&nbsp;&nbsp;
-                                      <span id="spanDateReport"></span>
-                                    </td>
-                                    <td width="1">
-                                      <img src="HeaderSp.gif" width="1" height="24">
-                                    </td>
-                                    <td nowrap align="right">&nbsp;&nbsp;&nbsp;&nbsp;
-                                      <img src="CARESTREAM_SMALL.GIF" width="73" height="18" align="absmiddle">
-                                      <a href="javascript:CloseAndExit()">&nbsp;&nbsp;
-                                        <img src='close.gif' width='12' height='12' border='1' align='absmiddle'>&nbsp;&nbsp;</a>
-                                    </td>
-                                    <td nowrap>&nbsp;</td>
-                                </tr>
-                              </table>
-                              <br>
-                              <center id="allImages">
-                                <table cellpadding=0 width="300" height="26" cellspacing=0 border=0 background="all_imgs.gif" ID="Table6">
-                                  <tr>
-                                    <td align="center">
-                                      <a href="javascript:enlargeReport();">
-                                        <b>View Study Images</b>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                </table>
-                              </center>
-                              <br>
-                            </span>
-
-                            <div id="divStudies" style="display:none;">
-                              <table border="0" cellpadding="0" cellspacing="0" ID="tblInnerStudy">
-                                <tr>
-                                  <td bordercolor="#FFFFFF" valign=top>
-                                    &nbsp;&nbsp;Studies List
-                                    <p>
-                                      <hr color="#C5821E" size="1">
-                                      <div id="divOverFlow" style="overflow:auto">
-                                        <table border="0" cellpadding="0" bordercolor="#C5821E" bgcolor="#FFFFFF" ID="tblStudiesList">
-                                          <tr>
-                                            <td bordercolor="#FFFFFF" valign=top>
-                                              <script language="JavaScript" type="text/JavaScript">			
+<div id="divStudies" style="display:none;">
+	<table border="0" cellpadding="0" cellspacing="0" ID="tblInnerStudy">
+	<tr><td  bordercolor="#FFFFFF" valign=top>
+		&nbsp;&nbsp;Studies List<p>
+		<hr color="#C5821E" size="1">
+		<div id="divOverFlow" style="overflow:auto">
+			<table border="0" cellpadding="0" bordercolor="#C5821E" bgcolor="#FFFFFF" ID="tblStudiesList">
+			<tr>
+				<td bordercolor="#FFFFFF" valign=top>
+					<script language="JavaScript" type="text/JavaScript">			
 						for (var i=0;i<intStudies;i++){
 						document.write("&nbsp;&nbsp;&nbsp;<img src='SL.gif' width='11' height='15' align='texttop'>&nbsp;&nbsp;");
 						if(arrStdLinked[i]){
@@ -1629,17 +1566,16 @@
 						document.write("<br><br>");
 						}
 					</script>
-                                              <br>
-                                            </td>
-                                          </tr>
-                                        </table>
-                                      </div>
-                                  </td>
-                                </tr>
-                              </table>
-                            </div>
+				<br></td>
+			</tr>
+			</table>
+		</div>
+		</td>
+	</tr>
+	</table>
+</div>
 
-                            <script language="JavaScript" type="text/JavaScript">
+<script language="JavaScript" type="text/JavaScript">
 z=0;
 var r;
 
@@ -1671,65 +1607,47 @@ var r;
 
 </script>
 
-                            </td>
-                        </tr>
-                      </table>
-                    </div>
-                    </td>
-                </tr>
-              </table>
-              </td>
-          </tr>
-          <!-- End: Reports -->
-        </table>
-        </td>
-        <td valign="top">
-          <!-- Header Start -->
-          <table width="100%" border="0" cellpadding="0" cellspacing="0" ID="Table1">
-            <tr height="18">
-              <td nowrap colspan="2" bgcolor="#EA7125">&nbsp;&nbsp;
-                <script language="JavaScript" type="text/JavaScript">document.write("<a href=\"LinkPage.htm\" target=\"_blank\">"+_institution+"</a>");</script>
-              </td>
+														</td>
+													</tr>
+												</table>
+											</div>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<!-- End: Reports -->
+					</table>
+				</td>
+				<td valign="top">
+					<!-- Header Start -->
+					<table width="100%" border="0" cellpadding="0" cellspacing="0" ID="Table1">
+						<tr height="18">
+							<td nowrap colspan="2" bgcolor="#EA7125" >&nbsp;&nbsp;<script language="JavaScript" type="text/JavaScript">document.write("<a href=\"LinkPage.htm\" target=\"_blank\">"+_institution+"</a>");</script></td>
 
-              <td bgcolor=#FFFFFF nowrap align="right" rowspan="2" width='12'>
-                <img src="CARESTREAM_LOGO.GIF" align="absmiddle">
-              </td>
-              <td bgcolor="#EA7125" width="20">
-                <a href="javascript:CloseAndExit()">
-                  <img src='close.gif' width='12' height='12' border='1' align='absmiddle'>
-                </a>
-              </td>
+							<td bgcolor=#FFFFFF nowrap align="right" rowspan="2" width ='12'><img src="CARESTREAM_LOGO.GIF"  align="absmiddle"></td>
+							<td bgcolor="#EA7125" width ="20"><a href="javascript:CloseAndExit()"><img src='close.gif' width='12' height='12' border='1' align='absmiddle'></a></td>
+							
+						</tr>
+						<tr height="21">
+							<td bgcolor=#FFFFFF  >&nbsp;<span id="spanStdPName"></span>&nbsp;<span id="spanStdPID"></span></td>
+							<td  bgcolor=#FFFFFF align="right"><a id="stdExplorer" href="javascript:switchStudies(-1)">[<img src='Mglass.gif' width='12' height='10' border='0' align='absmiddle'>&nbsp;Studies Explorer]</a></td>
+							<td bgcolor="#EA7125"></td>
+						</tr>
+					</table>
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" ID="Table3">
+						<tr bgcolor="#F5F5F5">
+							<td nowrap height="22">&nbsp;
+								<span id="spanStdPSex"></span>&nbsp;
+								Age:
+								<span id="spanStdPAge"></span>
+							<td nowrap>&nbsp;&nbsp;<script language="JavaScript" type="text/JavaScript">document.write(_bpart+" ");</script><span id="spanMod"></span>&nbsp;[<span id="spanStdAccession"></span>]</td>
+							<td nowrap>&nbsp;&nbsp;<span id="spanDate"></span></td>
 
-            </tr>
-            <tr height="21">
-              <td bgcolor=#FFFFFF>&nbsp;
-                <span id="spanStdPName"></span>&nbsp;
-                <span id="spanStdPID"></span>
-              </td>
-              <td bgcolor=#FFFFFF align="right">
-                <a id="stdExplorer" href="javascript:switchStudies(-1)">[
-                  <img src='Mglass.gif' width='12' height='10' border='0' align='absmiddle'>&nbsp;Studies Explorer]</a>
-              </td>
-              <td bgcolor="#EA7125"></td>
-            </tr>
-          </table>
-          <table width="100%" border="0" cellspacing="0" cellpadding="0" ID="Table3">
-            <tr bgcolor="#F5F5F5">
-              <td nowrap height="22">&nbsp;
-                <span id="spanStdPSex"></span>&nbsp; Age:
-                <span id="spanStdPAge"></span>
-                <td nowrap>&nbsp;&nbsp;
-                  <script language="JavaScript" type="text/JavaScript">document.write(_bpart+" ");</script>
-                  <span id="spanMod"></span>&nbsp;[
-                  <span id="spanStdAccession"></span>]</td>
-                <td nowrap>&nbsp;&nbsp;
-                  <span id="spanDate"></span>
-                </td>
+						</tr>
+					</table>
 
-            </tr>
-          </table>
-
-          <script language="JavaScript" type="text/JavaScript">
+					<script language="JavaScript" type="text/JavaScript">
 					if (!isSummary && (showMPT || showLTBX))
 					{
 						document.write("<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" ID=\"Table12\">");
@@ -1744,11 +1662,11 @@ var r;
 						document.write("</table>");
 					}
 					</script>
-
-          <!-- Header End -->
-          <!-- div instead of frames-->
-
-          <script language="JavaScript" type="text/JavaScript">
+					
+					<!-- Header End -->
+					<!-- div instead of frames-->
+					
+							<script language="JavaScript" type="text/JavaScript">
 							// here you can change the rows colors
 							var bgColors = new Array("#F5F5F5","white");
 							
@@ -1895,10 +1813,10 @@ var r;
 								document.write("</form></div>");
 							}
 								</script>
-
-          </td>
-    </tr>
-  </table>
-</body>
-
+							
+				</td>
+			</tr>
+		</table>
+	</body>
+		
 </html>
